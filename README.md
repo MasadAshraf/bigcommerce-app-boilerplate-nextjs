@@ -73,7 +73,8 @@ cp .env-sample .env
 npm run db:setup
 npm run db:migrate
 ```
-For adding new migration, add create new file of table name in migratations/table, Make sure filename and function name is same.
+For adding new migration, add create new file of table name in migratations/table, 
+   > Make sure filename and function name is same for migrations.
 
 10. Start your dev environment in a dedicated terminal session, **separate from `ngrok`**.
 

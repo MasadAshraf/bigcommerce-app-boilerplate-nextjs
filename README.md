@@ -16,7 +16,7 @@ npm -v
 2. Clone and/or fork the repo and install npm packages:
 
 ```shell
-git clone git@github.com:bigcommerce/sample-app-nodejs.git my-bigcommerce-app
+git clone git@github.com:MasadAshraf/bigcommerce-app-boilerplate-nextjs.git my-bigcommerce-app
 cd my-bigcommerce-app
 npm install
 ```
@@ -71,7 +71,9 @@ cp .env-sample .env
 
 ```shell
 npm run db:setup
+npm run db:migrate
 ```
+For adding new migration, add create new file of table name in migratations/table, Make sure filename and function name is same.
 
 10. Start your dev environment in a dedicated terminal session, **separate from `ngrok`**.
 

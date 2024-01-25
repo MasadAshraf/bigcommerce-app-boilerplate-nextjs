@@ -13,6 +13,16 @@ const MYSQL_CONFIG = {
 const connection = mysql.createConnection(process.env.DATABASE_URL ? process.env.DATABASE_URL : MYSQL_CONFIG);
 const query = util.promisify(connection.query.bind(connection));
 
+const migrationTableCreate = query(`
+  CREATE TABLE \`migrations\` (
+    \`id\` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    \`table_name\` varchar(255) NOT NULL,
+    \`created_at\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (\`id\`),
+    UNIQUE KEY \`table_name\` (\`table_name\`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+`);
+
 const usersCreate = query('CREATE TABLE `users` (\n' +
     '  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n' +
     '  `userId` int(11) NOT NULL,\n' +
@@ -43,6 +53,15 @@ const storeUsersCreate = query('CREATE TABLE `storeUsers` (\n' +
     ') ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;\n'
 );
 
-Promise.all([usersCreate, storesCreate]).then(() => {
+const insertMigration = query(`
+  INSERT INTO \`migrations\` (\`table_name\`, \`created_at\`)
+  VALUES
+  ('users', CURRENT_TIMESTAMP),
+  ('stores', CURRENT_TIMESTAMP),
+  ('storeUsers', CURRENT_TIMESTAMP);
+`);
+
+Promise.all([migrationTableCreate,usersCreate,storeUsersCreate,insertMigration]).then(() => {
     connection.end();
 });
+

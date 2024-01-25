@@ -9,7 +9,8 @@
     "start": "next start -p $PORT",
     "test": "jest --updateSnapshot",
     "lint": "eslint . --ext .ts,.tsx,.js",
-    "db:setup": "node scripts/db.js"
+    "db:setup": "node scripts/db.js",
+    "db:migrate": "node migrations/index.mjs"
   },
   "keywords": [],
   "author": "",

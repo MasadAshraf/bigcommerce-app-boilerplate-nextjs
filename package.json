@@ -13,7 +13,7 @@
     "db:migrate": "node migrations/index.mjs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Muhammad Masad",
   "license": "ISC",
   "engines": {
     "node": ">=16 <20",
